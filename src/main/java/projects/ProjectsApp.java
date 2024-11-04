@@ -12,7 +12,7 @@ public class ProjectsApp {
 	
 	// setup for adding a project
 	// @formatter:off
-	private List<String> operations = List.of("1) Add a project");
+	private List<String> operations = List.of("1) Add a project", "2) List projects");
 	// @formatter:on
 	private Scanner scanner = new Scanner(System.in);
 	private ProjectService projectService = new ProjectService();
@@ -36,6 +36,9 @@ public class ProjectsApp {
 					case 1:
 						createProject();
 						break;
+					case 2:
+						listProjects();
+						break;
 					default:
 						System.out.println("\n" + selection + " is not a valid selection. Try again.");
 						break;
@@ -47,6 +50,16 @@ public class ProjectsApp {
 		}
 	}
 	
+	// lists all projects in the db
+	private void listProjects() {
+		List<Project> projects = projectService.fetchAllProjects();
+		System.out.println("\nProjects:");
+		
+		// prints out each project
+		projects.forEach(project -> System.out.println(" " + project.getProjectId() + ": " + project.getProjectName()));
+		
+	}
+
 	// collects the data for the new project
 	private void createProject() {
 		String projectName = getStringInput("Enter the project name");
