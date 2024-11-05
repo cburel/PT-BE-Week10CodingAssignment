@@ -123,6 +123,8 @@ class ProjectDao extends DaoBase {
 					setParameter(stmt, 1, projectId, Integer.class);
 					
 					try(ResultSet rs = stmt.executeQuery()){
+						
+						// TODO: debug currently skips this step
 						if(rs.next()) {
 							project = extract(rs, Project.class);
 						}
