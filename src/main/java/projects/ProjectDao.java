@@ -111,7 +111,7 @@ class ProjectDao extends DaoBase {
 
 	// gets a project in the db by its id
 	public Optional<Project> fetchProjectById(Integer projectId) {
-		String sql = "SELECT * FROM " + PROJECT_TABLE + "WHERE project_id = ?";
+		String sql = "SELECT * FROM " + PROJECT_TABLE + " WHERE project_id = ?";
 		
 		try(Connection conn = DbConnection.getConnection()){
 			startTransaction(conn);
@@ -123,8 +123,6 @@ class ProjectDao extends DaoBase {
 					setParameter(stmt, 1, projectId, Integer.class);
 					
 					try(ResultSet rs = stmt.executeQuery()){
-						
-						// TODO: debug currently skips this step
 						if(rs.next()) {
 							project = extract(rs, Project.class);
 						}
